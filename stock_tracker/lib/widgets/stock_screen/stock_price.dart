@@ -26,18 +26,24 @@ class StockPrice extends StatelessWidget {
         Row(
           //  crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(currentPrice.toStringAsFixed(2),
-                style:
-                    const TextStyle(fontSize: 40, fontWeight: FontWeight.w900)),
+            animation(
+              Text(currentPrice.toStringAsFixed(2),
+                  key: ValueKey<double>(currentPrice),
+                  style: const TextStyle(
+                      fontSize: 40, fontWeight: FontWeight.w900)),
+            ),
             const SizedBox(width: 10),
             Text(currency, style: const TextStyle(fontSize: 15)),
           ],
         ),
         Row(
           children: [
-            Text(
-              '$differenceSign${differenceFromYesterday.toStringAsFixed(2)} ($differenceSign${percentageChange.toStringAsFixed(2)}%)',
-              style: TextStyle(color: differenceColor),
+            animation(
+               Text(
+                key: ValueKey<double>(differenceFromYesterday),
+                '$differenceSign${differenceFromYesterday.toStringAsFixed(2)} ($differenceSign${percentageChange.toStringAsFixed(2)}%)',
+                style: TextStyle(color: differenceColor),
+              ),
             ),
             const SizedBox(width: 5),
             const Text('Today')
@@ -60,10 +66,13 @@ class StockPrice extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  '$differenceSign${percentageChange.toStringAsFixed(2)}%',
-                  style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                animation(
+                  Text(
+                    '$differenceSign${percentageChange.toStringAsFixed(2)}%',
+                    key: ValueKey<double>(percentageChange),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const SizedBox(width: 5),
                 Text(
@@ -77,4 +86,11 @@ class StockPrice extends StatelessWidget {
       ],
     );
   }
+
+
 }
+
+ AnimatedSwitcher animation(Text text) {
+    return AnimatedSwitcher(
+        duration: const Duration(milliseconds: 600), child: text);
+  }

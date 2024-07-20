@@ -10,7 +10,7 @@ class StockGraph extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color = Colors.green;
     Color gradiantColor = Colors.green.shade200;
-    if (priceHistory[0].y > priceHistory[priceHistory.length - 1].y) {
+    if (priceHistory.isNotEmpty&& priceHistory[0].y > priceHistory[priceHistory.length - 1].y) {
       color = Colors.red;
       gradiantColor = Colors.red.shade200;
     }

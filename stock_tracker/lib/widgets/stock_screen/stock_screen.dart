@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:stock_tracker/models/stock/stock.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stock_tracker/providers/stock_provider.dart';
 import 'package:stock_tracker/widgets/stock_item/stock_graph.dart';
 import 'package:stock_tracker/widgets/stock_screen/price_line_chart.dart';
 import 'package:stock_tracker/widgets/stock_screen/stock_header.dart';
 import 'package:stock_tracker/widgets/stock_screen/stock_price.dart';
 
-class StockScreen extends StatefulWidget {
-  const StockScreen(this.stock, {super.key});
+class StockScreen extends ConsumerWidget {
+  const StockScreen(this.index, {super.key});
 
-  final Stock stock;
+  final int index;
 
   @override
-  State<StockScreen> createState() => _StockScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final stock = ref.watch(stockProvider).stocks[index];
 
-class _StockScreenState extends State<StockScreen> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -31,56 +29,76 @@ class _StockScreenState extends State<StockScreen> {
         child: Column(
           children: [
             StockHeader(
-                name: widget.stock.name,
-                ticker: widget.stock.ticker,
-                exchange: widget.stock.exchange,
-                logo: widget.stock.logoUrl),
+                name: stock.name,
+                ticker: stock.ticker,
+                exchange: stock.exchange,
+                logo: stock.logoUrl),
             StockPrice(
-              currency: widget.stock.currency,
-              currentPrice: widget.stock.currentPrice,
-              percentageChange: widget.stock.percentageChange,
-              differenceFromYesterday: widget.stock.differenceFromYesterday,
-              differenceSign: widget.stock.differenceSign,
-              differenceColor: widget.stock.differenceColor,
+              currency: stock.currency,
+              currentPrice: stock.currentPrice,
+              percentageChange: stock.percentageChange,
+              differenceFromYesterday: stock.differenceFromYesterday,
+              differenceSign: stock.differenceSign,
+              differenceColor: stock.differenceColor,
             ),
             SizedBox(
               height: 150,
               width: MediaQuery.of(context).size.width,
-              child: StockGraph(widget.stock.priceHistory),
+              child: StockGraph(stock.priceHistory),
             ),
-            // SizedBox(
-            //   height: 150,
-            //   width: MediaQuery.of(context).size.width,
-            //   child: SliderGraph(
-            //     currentPrice: widget.stock.currentPrice,
-            //     lowPrice: widget.stock.low,
-            //     highPrice: widget.stock.high,
-            //   ),
-            // ),
+            const Spacer(),
+            const Row(
+              children: [
+                Text(
+                  "High/Low",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                SizedBox(width: 2),
+                Icon(
+                  Icons.info_outline,
+                  size: 18,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 100,
+              width: MediaQuery.of(context).size.width,
+              child: PriceLineChart(
+                currentPrice: stock.currentPrice,
+                lowPrice: stock.low,
+                highPrice: stock.high,
+              ),
+            ),
             const Spacer(),
             Row(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 8, 40, 87),
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        padding: const EdgeInsets.all(16),
-                      ),
-                      child: const Text(
-                        'BUY',
-                        style: TextStyle(fontSize: 16),
-                      )),
-                ),
+                actionButton('BUY'),
+                const SizedBox(width: 8),
+                actionButton('SELL'),
               ],
             )
           ],
         ),
       ),
+    );
+  }
+
+  Widget actionButton(String text) {
+    return Expanded(
+      child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 8, 40, 87),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            padding: const EdgeInsets.all(16),
+          ),
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 16),
+          )),
     );
   }
 }

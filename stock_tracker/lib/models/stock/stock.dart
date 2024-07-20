@@ -24,6 +24,7 @@ class Stock with _$Stock {
   @override
   factory Stock.fromJson(Map<String, dynamic> profileData,
       Map<String, dynamic> quoteData, List<FlSpot> priceHistory) {
+
     return Stock(
         name: profileData['name'],
         ticker: profileData['ticker'],
