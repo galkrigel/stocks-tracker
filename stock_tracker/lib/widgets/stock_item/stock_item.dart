@@ -33,7 +33,7 @@ class StockItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(stock.ticker),
+                Text(stock.ticker,  style: const TextStyle(fontWeight: FontWeight.w300)),
               ],
             ),
           ),

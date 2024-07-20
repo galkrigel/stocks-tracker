@@ -60,9 +60,7 @@ class StockScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 100,
-              width: MediaQuery.of(context).size.width,
+            Flexible(
               child: PriceLineChart(
                 currentPrice: stock.currentPrice,
                 lowPrice: stock.low,

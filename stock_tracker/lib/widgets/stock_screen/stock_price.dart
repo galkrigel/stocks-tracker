@@ -52,34 +52,35 @@ class StockPrice extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
-          width: 100,
-          height: 25,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: Colors.grey.shade400,
-              width: 1,
+        IntrinsicWidth(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: Colors.grey.shade400,
+                width: 1,
+              ),
             ),
-          ),
-          child: Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                animation(
-                  Text(
-                    '$differenceSign${percentageChange.toStringAsFixed(2)}%',
-                    key: ValueKey<double>(percentageChange),
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold),
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  animation(
+                    Text(
+                      '$differenceSign${percentageChange.toStringAsFixed(2)}%',
+                      key: ValueKey<double>(percentageChange),
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 5),
-                Text(
-                  'Today',
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
-                ),
-              ],
+                  const SizedBox(width: 5),
+                  Text(
+                    'Today',
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+                  ),
+                ],
+              ),
             ),
           ),
         )

@@ -24,12 +24,13 @@ class PriceLineChart extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(24.0),
         child: LineChart(
           LineChartData(
             gridData: const FlGridData(show: false),
             titlesData: FlTitlesData(
               topTitles: AxisTitles(
+                axisNameSize: 25,
                 axisNameWidget: const Text(
                   "Day's Range",
                   style: TextStyle(color: Colors.grey),

@@ -21,11 +21,14 @@ class StockHeader extends StatelessWidget {
       leading: Image.network(logo),
       title: Row(
         children: [
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+        Flexible(
+            child: Text(
+              overflow: TextOverflow.ellipsis,
+              name,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(width: 10),
@@ -49,30 +52,31 @@ class StockHeader extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-          Container(
-            width: 100,
-            height: 20,
-            decoration: BoxDecoration(
-              color: Colors.orange.shade100,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Colors.orange,
-                width: 1,
+          IntrinsicWidth(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              decoration: BoxDecoration(
+                color: Colors.orange.shade100,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Colors.orange,
+                  width: 1,
+                ),
               ),
-            ),
-            child: const Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.sunny, size: 12, color: Colors.orange),
-                  Text(
-                    "Market Open",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.orange,
+              child: const Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.sunny, size: 12, color: Colors.orange),
+                    Text(
+                      "Market Open",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.orange,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           )
