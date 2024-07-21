@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_tracker/consts.dart';
 import 'package:stock_tracker/models/stock/stock.dart';
 import 'package:stock_tracker/widgets/stock_item/stock_graph.dart';
 import 'package:stock_tracker/widgets/stock_screen/stock_price.dart';
@@ -31,9 +32,27 @@ class StockItem extends StatelessWidget {
                 Text(
                   stock.name,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(stock.ticker,  style: const TextStyle(fontWeight: FontWeight.w300)),
+                Row(
+                  children: [
+                    Text(stock.ticker,
+                        style: TextStyle(color: Colors.grey[700])),
+                    const SizedBox(width: 4),
+                    Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: UiColors.orange.withOpacity(0.2),
+                          border: Border.all(
+                              color: UiColors.orange.withOpacity(0.5)),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          Icons.sunny,
+                          size: 12,
+                          color: UiColors.orange,
+                        )),
+                  ],
+                ),
               ],
             ),
           ),
@@ -44,15 +63,13 @@ class StockItem extends StatelessWidget {
           )
         ],
       ),
-      leading:
-          SizedBox(width: 50, height: 50, child: Image.network(stock.logoUrl)),
+      leading: companyLogo(stock.logoUrl),
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           animation(Text(
             style: const TextStyle(
-              fontWeight: FontWeight.bold,
               fontSize: 14,
             ),
             '${stock.currentPrice.toStringAsFixed(2)} ${stock.currency}',
@@ -73,4 +90,20 @@ class StockItem extends StatelessWidget {
       ),
     );
   }
+}
+
+SizedBox companyLogo(String logoUrl) {
+  return SizedBox(
+    width: 40,
+    height: 40,
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(logoUrl)),
+    ),
+  );
 }

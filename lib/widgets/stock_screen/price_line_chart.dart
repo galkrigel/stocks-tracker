@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_tracker/consts.dart';
 
 class PriceLineChart extends StatelessWidget {
   final double lowPrice;
@@ -41,16 +42,16 @@ class PriceLineChart extends StatelessWidget {
                     if (value == lowPrice) {
                       return Padding(
                         padding: const EdgeInsets.only(left: 48.0),
-                        child: Text(lowPrice.toStringAsFixed(2),
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text(
+                          lowPrice.toStringAsFixed(2),
+                        ),
                       );
                     } else if (value == highPrice) {
                       return Padding(
                         padding: const EdgeInsets.only(right: 48.0),
-                        child: Text(highPrice.toStringAsFixed(2),
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text(
+                          highPrice.toStringAsFixed(2),
+                        ),
                       );
                     } else {
                       return Container();
@@ -79,7 +80,7 @@ class PriceLineChart extends StatelessWidget {
                     if (spot.x == currentPrice) {
                       return FlDotCirclePainter(
                         radius: 6,
-                        color: Colors.blue,
+                        color: UiColors.blue,
                       );
                     } else {
                       return FlDotCirclePainter(

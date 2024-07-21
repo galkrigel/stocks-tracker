@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:stock_tracker/consts.dart';
 part 'stock.freezed.dart';
 
 @freezed
@@ -24,7 +25,6 @@ class Stock with _$Stock {
   @override
   factory Stock.fromJson(Map<String, dynamic> profileData,
       Map<String, dynamic> quoteData, List<FlSpot> priceHistory) {
-
     return Stock(
         name: profileData['name'],
         ticker: profileData['ticker'],
@@ -43,5 +43,6 @@ class Stock with _$Stock {
 
   String get differenceSign => differenceFromYesterday > 0 ? '+' : '';
 
-  Color get differenceColor => percentageChange > 0 ? Colors.green : Colors.red;
+  Color get differenceColor =>
+      percentageChange > 0 ? UiColors.green : UiColors.red;
 }

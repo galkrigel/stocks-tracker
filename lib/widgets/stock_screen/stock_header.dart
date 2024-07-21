@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:stock_tracker/consts.dart';
+import 'package:stock_tracker/widgets/stock_item/stock_item.dart';
 
 class StockHeader extends StatelessWidget {
   const StockHeader(
@@ -18,16 +20,16 @@ class StockHeader extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       isThreeLine: true,
-      leading: Image.network(logo),
+      leading: companyLogo(logo),
       title: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        Flexible(
+          Flexible(
             child: Text(
               overflow: TextOverflow.ellipsis,
               name,
               style: const TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -56,23 +58,23 @@ class StockHeader extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               decoration: BoxDecoration(
-                color: Colors.orange.shade100,
+                color: UiColors.orange.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                  color: Colors.orange,
+                  color: UiColors.orange,
                   width: 1,
                 ),
               ),
-              child: const Center(
+              child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.sunny, size: 12, color: Colors.orange),
+                    Icon(Icons.sunny, size: 12, color: UiColors.orange),
                     Text(
                       "Market Open",
                       style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.orange,
+                        fontSize: 10,
+                        color: UiColors.orange,
                       ),
                     ),
                   ],

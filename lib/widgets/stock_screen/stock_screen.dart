@@ -41,6 +41,7 @@ class StockScreen extends ConsumerWidget {
               differenceSign: stock.differenceSign,
               differenceColor: stock.differenceColor,
             ),
+            const Spacer(),
             SizedBox(
               height: 150,
               width: MediaQuery.of(context).size.width,
@@ -51,7 +52,7 @@ class StockScreen extends ConsumerWidget {
               children: [
                 Text(
                   "High/Low",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style: TextStyle(fontSize: 18),
                 ),
                 SizedBox(width: 2),
                 Icon(
@@ -67,13 +68,15 @@ class StockScreen extends ConsumerWidget {
                 highPrice: stock.high,
               ),
             ),
-            const Spacer(),
-            Row(
-              children: [
-                actionButton('BUY'),
-                const SizedBox(width: 8),
-                actionButton('SELL'),
-              ],
+            const SizedBox(height: 4),
+            SafeArea(
+              child: Row(
+                children: [
+                  actionButton('BUY'),
+                  const SizedBox(width: 8),
+                  actionButton('SELL'),
+                ],
+              ),
             )
           ],
         ),

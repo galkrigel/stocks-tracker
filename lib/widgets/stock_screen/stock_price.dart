@@ -39,7 +39,7 @@ class StockPrice extends StatelessWidget {
         Row(
           children: [
             animation(
-               Text(
+              Text(
                 key: ValueKey<double>(differenceFromYesterday),
                 '$differenceSign${differenceFromYesterday.toStringAsFixed(2)} ($differenceSign${percentageChange.toStringAsFixed(2)}%)',
                 style: TextStyle(color: differenceColor),
@@ -71,7 +71,8 @@ class StockPrice extends StatelessWidget {
                       '$differenceSign${percentageChange.toStringAsFixed(2)}%',
                       key: ValueKey<double>(percentageChange),
                       style: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 5),
@@ -87,11 +88,9 @@ class StockPrice extends StatelessWidget {
       ],
     );
   }
-
-
 }
 
- AnimatedSwitcher animation(Text text) {
-    return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 600), child: text);
-  }
+AnimatedSwitcher animation(Text text) {
+  return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 600), child: text);
+}

@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_tracker/consts.dart';
 
 class StockGraph extends StatelessWidget {
   const StockGraph(this.priceHistory, {super.key});
@@ -8,11 +9,12 @@ class StockGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Colors.green;
-    Color gradiantColor = Colors.green.shade200;
-    if (priceHistory.isNotEmpty&& priceHistory[0].y > priceHistory[priceHistory.length - 1].y) {
-      color = Colors.red;
-      gradiantColor = Colors.red.shade200;
+    Color color = UiColors.green;
+    Color gradiantColor = UiColors.green.withOpacity(0.1);
+    if (priceHistory.isNotEmpty &&
+        priceHistory[0].y > priceHistory[priceHistory.length - 1].y) {
+      color = UiColors.red;
+      gradiantColor = UiColors.red.withOpacity(0.1);
     }
 
     return priceHistory.isEmpty
@@ -24,19 +26,22 @@ class StockGraph extends StatelessWidget {
               borderData: FlBorderData(show: false),
               lineBarsData: [
                 LineChartBarData(
+                  barWidth: 1,
                   spots: priceHistory,
                   isCurved: true,
                   color: color,
                   dotData: const FlDotData(show: false),
                   belowBarData: BarAreaData(
                     show: true,
-                    color: gradiantColor,
+                   color: gradiantColor,
                     gradient: LinearGradient(
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
                         gradiantColor.withOpacity(0.1),
+                        gradiantColor.withOpacity(0.2),
                         gradiantColor.withOpacity(0.3),
+                        gradiantColor.withOpacity(0.4),
                         gradiantColor.withOpacity(0.5),
                       ],
                     ),
