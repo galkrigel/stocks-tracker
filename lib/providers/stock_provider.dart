@@ -47,6 +47,7 @@ class StockNotifier extends ChangeNotifier {
         Map<String, dynamic> profileData = json.decode(profileResponse.body);
         Map<String, dynamic> quoteData = json.decode(quoteResponse.body);
 
+        // Generate random price history to show in the StockGraph
         List<FlSpot> priceHistory = historicalData(symbol);
 
         Stock stock = Stock.fromJson(profileData, quoteData, priceHistory);
@@ -73,6 +74,8 @@ class StockNotifier extends ChangeNotifier {
   void _updatePrices() {
     for (int i = 0; i < _stocks.length; i++) {
       var stock = _stocks[i];
+
+      // Generate a price change between -1 to 1
       final priceChange = (_random.nextDouble() - 0.5) * 2;
       stock = stock.copyWith(currentPrice: stock.currentPrice + priceChange);
       if (stock.currentPrice > stock.high) {
@@ -92,7 +95,9 @@ class StockNotifier extends ChangeNotifier {
 
   List<FlSpot> historicalData(String symbol) {
     List<FlSpot> spots = [];
-    for (var i = 0; i < _numberOfHistoricalPoints; i++) {
+    for (int i = 0; i < _numberOfHistoricalPoints; i++) {
+
+      // Generate random price between 100 and 300
       spots.add(
         FlSpot(i.toDouble(), _random.nextDouble() * 200 + 100),
       );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_tracker/consts.dart';
-import 'package:stock_tracker/widgets/stock_item/stock_item.dart';
+import 'package:stock_tracker/widgets/stock_item/company_logo.dart';
 
 class StockHeader extends StatelessWidget {
   const StockHeader(
@@ -20,7 +20,7 @@ class StockHeader extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       isThreeLine: true,
-      leading: companyLogo(logo),
+      leading: CompanyLogo(logo),
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,34 +54,30 @@ class StockHeader extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-          IntrinsicWidth(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              decoration: BoxDecoration(
-                color: UiColors.orange.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  color: UiColors.orange,
-                  width: 1,
-                ),
-              ),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.sunny, size: 12, color: UiColors.orange),
-                    Text(
-                      "Market Open",
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: UiColors.orange,
-                      ),
-                    ),
-                  ],
-                ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            decoration: BoxDecoration(
+              color: UiColors.orange.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: UiColors.orange,
+                width: 1,
               ),
             ),
-          )
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.sunny, size: 12, color: UiColors.orange),
+                Text(
+                  "Market Open",
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: UiColors.orange,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

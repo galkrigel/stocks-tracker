@@ -8,19 +8,26 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
+String appTitle = 'Stocks tracker';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Stocks tracker',
+      title: appTitle,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         fontFamily: 'OpenSans',
         useMaterial3: true,
       ),
-      home: const StocksList(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(appTitle),
+        ),
+        body: const StocksList(),
+      ),
     );
   }
 }

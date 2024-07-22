@@ -13,28 +13,23 @@ class StocksList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final stocks = ref.watch(stockProvider).stocks;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stocks tracker'),
-      ),
-      body: stocks.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.separated(
-              shrinkWrap: true,
-              itemCount: stocks.length,
-              itemBuilder: (context, index) {
-                Stock item = stocks[index];
-                return StockItem(
-                  stock: item,
-                  index: index,
-                );
-              },
-              separatorBuilder: (context, index) => Divider(
-                color: Colors.grey[300],
-              ),
+    return stocks.isEmpty
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : ListView.separated(
+            shrinkWrap: true,
+            itemCount: stocks.length,
+            itemBuilder: (context, index) {
+              Stock item = stocks[index];
+              return StockItem(
+                stock: item,
+                index: index,
+              );
+            },
+            separatorBuilder: (context, index) => Divider(
+              color: Colors.grey[300],
             ),
-    );
+          );
   }
 }

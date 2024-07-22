@@ -36,28 +36,7 @@ class PriceLineChart extends StatelessWidget {
                   "Day's Range",
                   style: TextStyle(color: Colors.grey),
                 ),
-                sideTitles: SideTitles(
-                  showTitles: true,
-                  getTitlesWidget: (value, meta) {
-                    if (value == lowPrice) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 48.0),
-                        child: Text(
-                          lowPrice.toStringAsFixed(2),
-                        ),
-                      );
-                    } else if (value == highPrice) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 48.0),
-                        child: Text(
-                          highPrice.toStringAsFixed(2),
-                        ),
-                      );
-                    } else {
-                      return Container();
-                    }
-                  },
-                ),
+                sideTitles: sideTitles(lowPrice, highPrice),
               ),
               leftTitles:
                   const AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -102,4 +81,29 @@ class PriceLineChart extends StatelessWidget {
       ),
     );
   }
+}
+
+SideTitles sideTitles(double lowPrice, double highPrice) {
+  return SideTitles(
+    showTitles: true,
+    getTitlesWidget: (value, meta) {
+      if (value == lowPrice) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 48.0),
+          child: Text(
+            lowPrice.toStringAsFixed(2),
+          ),
+        );
+      } else if (value == highPrice) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 48.0),
+          child: Text(
+            highPrice.toStringAsFixed(2),
+          ),
+        );
+      } else {
+        return Container();
+      }
+    },
+  );
 }

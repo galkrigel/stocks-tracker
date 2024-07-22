@@ -17,38 +17,36 @@ class StockGraph extends StatelessWidget {
       gradiantColor = UiColors.red.withOpacity(0.1);
     }
 
-    return priceHistory.isEmpty
-        ? Container()
-        : LineChart(
-            LineChartData(
-              gridData: const FlGridData(show: false),
-              titlesData: const FlTitlesData(show: false),
-              borderData: FlBorderData(show: false),
-              lineBarsData: [
-                LineChartBarData(
-                  barWidth: 1,
-                  spots: priceHistory,
-                  isCurved: true,
-                  color: color,
-                  dotData: const FlDotData(show: false),
-                  belowBarData: BarAreaData(
-                    show: true,
-                   color: gradiantColor,
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        gradiantColor.withOpacity(0.1),
-                        gradiantColor.withOpacity(0.2),
-                        gradiantColor.withOpacity(0.3),
-                        gradiantColor.withOpacity(0.4),
-                        gradiantColor.withOpacity(0.5),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+    return LineChart(
+      LineChartData(
+        gridData: const FlGridData(show: false),
+        titlesData: const FlTitlesData(show: false),
+        borderData: FlBorderData(show: false),
+        lineBarsData: [
+          LineChartBarData(
+            barWidth: 1,
+            spots: priceHistory,
+            isCurved: true,
+            color: color,
+            dotData: const FlDotData(show: false),
+            belowBarData: BarAreaData(
+              show: true,
+              color: gradiantColor,
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  gradiantColor.withOpacity(0.1),
+                  gradiantColor.withOpacity(0.2),
+                  gradiantColor.withOpacity(0.3),
+                  gradiantColor.withOpacity(0.4),
+                  gradiantColor.withOpacity(0.5),
+                ],
+              ),
             ),
-          );
+          ),
+        ],
+      ),
+    );
   }
 }

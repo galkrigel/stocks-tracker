@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stock_tracker/consts.dart';
 import 'package:stock_tracker/models/stock/stock.dart';
+import 'package:stock_tracker/models/stock/stock_extension.dart';
+import 'package:stock_tracker/widgets/stock_item/company_logo.dart';
 import 'package:stock_tracker/widgets/stock_item/stock_graph.dart';
 import 'package:stock_tracker/widgets/stock_screen/stock_price.dart';
 import 'package:stock_tracker/widgets/stock_screen/stock_screen.dart';
@@ -13,6 +15,10 @@ class StockItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String priceChangeText =
+        '${stock.differenceSign}${stock.differenceFromYesterday.toStringAsFixed(2)} (${stock.percentageChange.toStringAsFixed(2)}%)';
+    String currentPriceText =
+        '${stock.currentPrice.toStringAsFixed(2)} ${stock.currency}';
     return ListTile(
       onTap: () => Navigator.push(
         context,
@@ -63,7 +69,7 @@ class StockItem extends StatelessWidget {
           )
         ],
       ),
-      leading: companyLogo(stock.logoUrl),
+      leading: CompanyLogo(stock.logoUrl),
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -72,15 +78,15 @@ class StockItem extends StatelessWidget {
             style: const TextStyle(
               fontSize: 14,
             ),
-            '${stock.currentPrice.toStringAsFixed(2)} ${stock.currency}',
+            currentPriceText,
             key: ValueKey<double>(
               stock.currentPrice,
             ),
           )),
           animation(
             Text(
+              priceChangeText,
               key: ValueKey<double>(stock.differenceFromYesterday),
-              '${stock.differenceSign}${stock.differenceFromYesterday.toStringAsFixed(2)} (${stock.percentageChange.toStringAsFixed(2)}%)',
               style: TextStyle(
                 color: stock.differenceColor,
               ),
@@ -90,20 +96,4 @@ class StockItem extends StatelessWidget {
       ),
     );
   }
-}
-
-SizedBox companyLogo(String logoUrl) {
-  return SizedBox(
-    width: 40,
-    height: 40,
-    child: Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Image.network(logoUrl)),
-    ),
-  );
 }

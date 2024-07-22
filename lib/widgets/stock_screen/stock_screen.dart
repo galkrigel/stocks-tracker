@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:stock_tracker/models/stock/stock_extension.dart';
 import 'package:stock_tracker/providers/stock_provider.dart';
 import 'package:stock_tracker/widgets/stock_item/stock_graph.dart';
 import 'package:stock_tracker/widgets/stock_screen/price_line_chart.dart';
@@ -61,7 +62,8 @@ class StockScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            Flexible(
+            SizedBox(
+              height: 100,
               child: PriceLineChart(
                 currentPrice: stock.currentPrice,
                 lowPrice: stock.low,

@@ -24,7 +24,6 @@ class StockPrice extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          //  crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             animation(
               Text(currentPrice.toStringAsFixed(2),
